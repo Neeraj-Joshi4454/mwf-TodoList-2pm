@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #addBtn, #delBtn , #editBtn{
+
+            background-color: black;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px gray;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        ul li{
+            font-size: 2.5rem;
+            margin-left: 20px;
+            list-style: none;
+            color: crimson;
+        }
+
+        #addBtn:hover, #delBtn:hover , #editBtn:hover{
+            background-color: transparent;
+            color: black;
+            border: 2px solid black;
+        }
+
+        
+
+        
+    </style>
+</head>
+<body>
+
+    <ul></ul>
+
+    <button id="addBtn" onclick="addTodo()">Add Todo</button>
+
+    <script>
+
+        var todos = [];
+
+        //add Todo
+        function addTodo(){
+            
+            var todo = window.prompt('Enter todo here.....')
+            todos.push(todo)
+            showTodos();
+
+        }
+
+        // show todos
+
+        function showTodos(){
+
+            document.querySelector('ul').innerHTML=""
+            todos.forEach((val, i ) => {
+                document.querySelector('ul').innerHTML+=`
+                    <li>${val} <button onclick={deleteTodo(${i})} id="delBtn">Delete</button> <button onclick={editTodo(${i})} id="editBtn">Edit</button>  </li> 
+                `
+            })
+        }
+
+        function deleteTodo(i){
+            
+            delete todos[i];
+            showTodos();
+        }
+
+        function editTodo(i){
+            var updatedTodo = window.prompt('Enter the Todo')
+            todos[i] = updatedTodo;
+            console.log(todos)
+            showTodos();
+        }
+
+
+    </script>
+</body>
+</html>
+
