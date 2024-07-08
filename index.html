@@ -59,8 +59,13 @@
         function addTodo(){
             
             var todo = window.prompt('Enter todo here.....')
-            todos.push(todo)
-            showTodos();
+            if(todo){
+
+                todos.push(todo)
+                showTodos();
+            }else{
+                alert('Please enter something')
+            }
 
         }
 
