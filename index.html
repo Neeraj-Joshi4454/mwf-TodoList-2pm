@@ -46,11 +46,9 @@
 <body>
 
     <h1>Welcome to My Todo App</h1>
-
-    <ul></ul>
-
+    <input type="text" id="title">
     <button id="addBtn" onclick="addTodo()">Add Todo</button>
-
+    <ul></ul>
     <script>
 
         var todos = [];
@@ -58,10 +56,12 @@
         //add Todo
         function addTodo(){
             
-            var todo = window.prompt('Enter todo here.....')
+            // var todo = window.prompt('Enter todo here.....')
+            var todo = document.getElementById("title").value;
             if(todo){
 
                 todos.push(todo)
+                document.getElementById("title").value = "";
                 showTodos();
             }else{
                 alert('Please enter something')
