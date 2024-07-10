@@ -52,7 +52,6 @@
 
       //add Todo
       function addTodo() {
-        // var todo = window.prompt('Enter todo here.....')
         var todo = document.getElementById("title").value;
         if (todo) {
           todos.push(todo);
@@ -64,7 +63,6 @@
       }
 
       // show todos
-
       function showTodos() {
         document.querySelector("ul").innerHTML = "";
         todos.forEach((val, i) => {
@@ -74,16 +72,22 @@
         });
       }
 
+      //delete Todo
       function deleteTodo(i) {
         delete todos[i];
         showTodos();
       }
 
+      //Edit Todo
       function editTodo(i) {
         var updatedTodo = window.prompt("Enter the Todo");
-        todos[i] = updatedTodo;
-        console.log(todos);
-        showTodos();
+        if (updatedTodo) {
+          todos[i] = updatedTodo;
+          console.log(todos);
+          showTodos();
+        } else {
+          alert("Please enter something");
+        }
       }
     </script>
   </body>
