@@ -27,12 +27,7 @@
             font-size: 1.5rem;
         }
 
-        ul li {
-            font-size: 2.5rem;
-            margin-left: 20px;
-            list-style: none;
-            color: crimson;
-        }
+       
 
         #addBtn:hover,
         #delBtn:hover,
@@ -41,6 +36,7 @@
             color: black;
             border: 2px solid black;
         }
+        
     </style>
 </head>
 
@@ -48,7 +44,7 @@
     <h1 class="text-3xl text-green-800">Welcome to My Todo App</h1>
     <input type="text" id="title" class="border"/>
     <button id="addBtn" onclick="addTodo()">Add Todo</button>
-    <ul></ul>
+     <table class="border-separate border border border-slate-400"></table>
     <script>
         var todos = [];
 
@@ -66,10 +62,20 @@
 
         // show todos
         function showTodos() {
-            document.querySelector("ul").innerHTML = "";
+            document.querySelector("table").innerHTML = "";
+            document.querySelector("table").innerHTML += `
+                    <tr>
+                        <th class="border border-slate-300">Title</th>
+                        <th class="border border-slate-300">Action </th> 
+                    </tr>  
+                `;
             todos.forEach((val, i) => {
-                document.querySelector("ul").innerHTML += `
-                    <li>${val} <button onclick={deleteTodo(${i})} id="delBtn">Delete</button> <button onclick={editTodo(${i})} id="editBtn">Edit</button>  </li> 
+                document.querySelector("table").innerHTML += `
+                    <tr>
+                        <td class="border border-slate-300">${val} </td>
+                        <td class="border border-slate-300"><button onclick={deleteTodo(${i})} id="delBtn">Delete</button> 
+                        <button onclick={editTodo(${i})} id="editBtn">Edit</button> </td> 
+                    </tr>  
                 `;
             });
         }
