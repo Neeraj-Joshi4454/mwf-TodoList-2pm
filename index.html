@@ -1,109 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-
+    <title>To do list</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        #addBtn,
-        #delBtn,
-        #editBtn {
-            background-color: black;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 5px gray;
-            margin: 10px;
-            border: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-        }
-
-       
-
-        #addBtn:hover,
-        #delBtn:hover,
-        #editBtn:hover {
-            background-color: transparent;
-            color: black;
-            border: 2px solid black;
-        }
-        
+      #addBtn,
+      #editBtn {
+        background-color: #1e90ff;
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        font-size: 16px;
+        margin: 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+      #delBtn {
+        background-color: #ff1e1e;
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        font-size: 16px;
+        margin: 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+      #delBtn:hover {
+        background-color: #bf2f2f;
+      }
+      #addBtn:hover,
+      #editBtn:hover {
+        background-color: #4169e1;
+      }
+      button i {
+        margin-right: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1 class="text-3xl text-green-800">Welcome to My Todo App</h1>
-    <input type="text" id="title" class="border"/>
-    <button id="addBtn" onclick="addTodo()">Add Todo</button>
-     <table class="border-separate border border border-slate-400"></table>
+    <input type="text" id="title" class="border" />
+    <button id="addBtn" onclick="addTodo()">
+      <i class="fa fa-plus"></i>Add Todo
+    </button>
+    <table class="border-separate border border border-slate-400"></table>
     <script>
-        var todos = [];
+      var todos = [];
 
-        //add Todo
-        function addTodo() {
-            var todo = document.getElementById("title").value;
-            if (todo) {
-                todos.push(todo);
-                document.getElementById("title").value = "";
-                showTodos();
-            } else {
-                alert("Please enter something");
-            }
+      //add Todo
+      function addTodo() {
+        var todo = document.getElementById("title").value;
+        if (todo) {
+          todos.push(todo);
+          document.getElementById("title").value = "";
+          showTodos();
+        } else {
+          alert("Please enter something");
         }
+      }
 
-        // show todos
-        function showTodos() {
-            document.querySelector("table").innerHTML = "";
-            document.querySelector("table").innerHTML += `
+      // show todos
+      function showTodos() {
+        document.querySelector("table").innerHTML = "";
+        document.querySelector("table").innerHTML += `
                     <tr>
                         <th class="border border-slate-300">Title</th>
                         <th class="border border-slate-300">Action </th> 
                     </tr>  
                 `;
-            todos.forEach((val, i) => {
-                document.querySelector("table").innerHTML += `
+        todos.forEach((val, i) => {
+          document.querySelector("table").innerHTML += `
                     <tr>
                         <td class="border border-slate-300">${val} </td>
-                        <td class="border border-slate-300"><button onclick={deleteTodo(${i})} id="delBtn">Delete</button> 
-                        <button onclick={editTodo(${i})} id="editBtn">Edit</button> </td> 
+                        <td class="border border-slate-300"><button onclick={deleteTodo(${i})} id="delBtn"><i class="fa fa-trash"></i>Delete</button> 
+                        <button onclick={editTodo(${i})} id="editBtn"><i class="fa fa-edit"></i>Edit</button> </td> 
                     </tr>  
                 `;
-            });
+        });
+      }
+
+      //delete Todo
+      function deleteTodo(i) {
+        delete todos[i];
+        showTodos();
+      }
+
+      //Edit Todo
+      function editTodo(i) {
+        alert("Do u want to update" + " " + todos[i]);
+
+        var updatedTodo = document.getElementById("title").value;
+
+        if (updatedTodo) {
+          todos[i] = updatedTodo;
+          console.log(todos);
+          showTodos();
+        } else {
+          alert("Please enter something");
         }
-
-        //delete Todo
-        function deleteTodo(i) {
-            delete todos[i];
-            showTodos();
-        }
-
-        //Edit Todo
-        function editTodo(i) {
-
-            alert("Do u want to update" + " " + todos[i])
-
-            var updatedTodo = document.getElementById("title").value;
-
-            if (updatedTodo) {
-                todos[i] = updatedTodo;
-                console.log(todos);
-                showTodos();
-            } else {
-                alert("Please enter something");
-            }
-        }
+      }
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
-</body>
-
+  </body>
 </html>
