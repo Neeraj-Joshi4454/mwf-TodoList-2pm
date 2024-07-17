@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To do list</title>
+    <title>Todo List</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
       * {
         margin: 0;
@@ -75,7 +76,7 @@
         showTodos();
       }
 
-      //add Todo
+      // add Todo
       function addTodo() {
         var todo = document.getElementById("title").value;
         if (todo) {
@@ -87,7 +88,7 @@
         }
       }
 
-      // show todos
+      // Show Todos
       function showTodos() {
         if (todos.length > 0) {
           document.querySelector("#table").innerHTML = "";
@@ -114,28 +115,20 @@
         }
       }
 
-      //delete Todo
+      // Delete Todo
       function deleteTodo(i) {
-        delete todos[i];
+        todos.splice(i, 1);
         showTodos();
       }
 
-      //Edit Todo
+      // Edit Todo
       function editTodo(i) {
-        alert("Do u want to update" + " " + todos[i]);
-
-        var updatedTodo = document.getElementById("title").value;
-
+        const updatedTodo = prompt("Update the todo item:", todos[i]);
         if (updatedTodo) {
           todos[i] = updatedTodo;
-          console.log(todos);
           showTodos();
-        } else {
-          alert("Please enter something");
         }
       }
     </script>
-
-    <script src="https://cdn.tailwindcss.com"></script>
   </body>
 </html>
