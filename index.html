@@ -16,7 +16,8 @@
       }
 
       #addBtn,
-      #editBtn {
+      #editBtn,
+      #clear {
         background-color: #1e90ff;
         border: none;
         color: white;
@@ -57,9 +58,22 @@
     <button id="addBtn" onclick="addTodo()">
       <i class="fa fa-plus"></i>Add Todo
     </button>
-    <table class="border-separate border border border-slate-400"></table>
+    <button id="clear" onclick="ClearData()">
+      <i class="fa fa-minus"></i>Clear
+    </button>
+    <table
+      class="border-separate border border border-slate-400"
+      id="table"
+    ></table>
     <script>
       var todos = [];
+
+      //   Clear Todo
+
+      function ClearData() {
+         todos = [];
+        showTodos();
+      }
 
       //add Todo
       function addTodo() {
@@ -75,22 +89,29 @@
 
       // show todos
       function showTodos() {
-        document.querySelector("table").innerHTML = "";
-        document.querySelector("table").innerHTML += `
+        if (todos.length > 0) {
+          document.querySelector("#table").innerHTML = "";
+          document.querySelector("#table").innerHTML += `
                     <tr>
                         <th class="border border-slate-300">Title</th>
                         <th class="border border-slate-300">Action </th> 
                     </tr>  
                 `;
-        todos.forEach((val, i) => {
-          document.querySelector("table").innerHTML += `
-                    <tr>
+          todos.forEach((val, i) => {
+            document.querySelector("#table").innerHTML += `
+                    <tr id="row">
                         <td class="border border-slate-300">${val} </td>
                         <td class="border border-slate-300"><button onclick={deleteTodo(${i})} id="delBtn"><i class="fa fa-trash"></i>Delete</button> 
                         <button onclick={editTodo(${i})} id="editBtn"><i class="fa fa-edit"></i>Edit</button> </td> 
                     </tr>  
                 `;
-        });
+          });
+        }
+        else
+        {
+            document.querySelector("#table").innerHTML = "";
+            document.querySelector("#table").innerHTML ="No Data Found";            
+        }
       }
 
       //delete Todo
