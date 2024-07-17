@@ -15,36 +15,68 @@
         padding: 0;
         box-sizing: border-box;
       }
+
+      #addBtn,
+      #editBtn,
+      #clear {
+        background-color: #1e90ff;
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        font-size: 16px;
+        margin: 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+      #delBtn {
+        background-color: #ff1e1e;
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        font-size: 16px;
+        margin: 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+      #delBtn:hover {
+        background-color: #bf2f2f;
+      }
+      #addBtn:hover,
+      #editBtn:hover {
+        background-color: #4169e1;
+      }
       button i {
         margin-right: 10px;
       }
     </style>
   </head>
-  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-      <h1 class="text-3xl text-purple-400 text-center mb-4">Welcome to My Todo App</h1>
-      <div class="flex mb-4">
-        <input type="text" id="title" class="border p-2 flex-grow" placeholder="Enter todo..." />
-        <button id="addBtn" onclick="addTodo()" class="bg-blue-500 text-white p-2 rounded ml-2">
-          <i class="fa fa-plus"></i>Add Todo
-        </button>
-      </div>
-      <table class="border-separate border border-slate-400 w-full">
-        <thead>
-          <tr>
-            <th class="border border-slate-300 p-2">Title</th>
-            <th class="border border-slate-300 p-2">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Todo items will be inserted here -->
-        </tbody>
-      </table>
-    </div>
+
+  <body>
+    <h1 class="text-3xl text-green-800">Welcome to My Todo App</h1>
+    <input type="text" id="title" class="border" />
+    <button id="addBtn" onclick="addTodo()">
+      <i class="fa fa-plus"></i>Add Todo
+    </button>
+    <button id="clear" onclick="ClearData()">
+      <i class="fa fa-minus"></i>Clear
+    </button>
+    <table
+      class="border-separate border border border-slate-400"
+      id="table"
+    ></table>
     <script>
       var todos = [];
 
-      // Add Todo
+      //   Clear Todo
+
+      function ClearData() {
+         todos = [];
+        showTodos();
+      }
+
+      // add Todo
       function addTodo() {
         var todo = document.getElementById("title").value;
         if (todo) {
@@ -58,23 +90,29 @@
 
       // Show Todos
       function showTodos() {
-        const tbody = document.querySelector("tbody");
-        tbody.innerHTML = "";
-        todos.forEach((val, i) => {
-          tbody.innerHTML += `
-            <tr>
-              <td class="border border-slate-300 p-2">${val}</td>
-              <td class="border border-slate-300 p-2">
-                <button onclick="deleteTodo(${i})" id="delBtn" class="bg-red-500 text-white p-2 rounded mr-2">
-                  <i class="fa fa-trash"></i>Delete
-                </button>
-                <button onclick="editTodo(${i})" id="editBtn" class="bg-blue-500 text-white p-2 rounded">
-                  <i class="fa fa-edit"></i>Edit
-                </button>
-              </td>
-            </tr>
-          `;
-        });
+        if (todos.length > 0) {
+          document.querySelector("#table").innerHTML = "";
+          document.querySelector("#table").innerHTML += `
+                    <tr>
+                        <th class="border border-slate-300">Title</th>
+                        <th class="border border-slate-300">Action </th> 
+                    </tr>  
+                `;
+          todos.forEach((val, i) => {
+            document.querySelector("#table").innerHTML += `
+                    <tr id="row">
+                        <td class="border border-slate-300">${val} </td>
+                        <td class="border border-slate-300"><button onclick={deleteTodo(${i})} id="delBtn"><i class="fa fa-trash"></i>Delete</button> 
+                        <button onclick={editTodo(${i})} id="editBtn"><i class="fa fa-edit"></i>Edit</button> </td> 
+                    </tr>  
+                `;
+          });
+        }
+        else
+        {
+            document.querySelector("#table").innerHTML = "";
+            document.querySelector("#table").innerHTML ="No Data Found";            
+        }
       }
 
       // Delete Todo
