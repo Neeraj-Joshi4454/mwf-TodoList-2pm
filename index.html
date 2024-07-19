@@ -1,95 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo List</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
 
-      #addBtn,
-      #editBtn,
-      #clear {
-        background-color: #1e90ff;
-        border: none;
-        color: white;
-        padding: 10px 10px;
-        font-size: 16px;
-        margin: 10px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-      }
-      #delBtn {
-        background-color: #ff1e1e;
-        border: none;
-        color: white;
-        padding: 10px 10px;
-        font-size: 16px;
-        margin: 10px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-      }
-      #delBtn:hover {
-        background-color: #bf2f2f;
-      }
-      #addBtn:hover,
-      #editBtn:hover {
-        background-color: #4169e1;
-      }
-      button i {
-        margin-right: 10px;
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-  <body>
-    <h1 class="text-3xl text-green-800">Welcome to My Todo App</h1>
-    <input type="text" id="title" class="border" />
-    <button id="addBtn" onclick="addTodo()">
-      <i class="fa fa-plus"></i>Add Todo
-    </button>
-    <button id="clear" onclick="ClearData()">
-      <i class="fa fa-minus"></i>Clear
-    </button>
-    <table
-      class="border-separate border border border-slate-400"
-      id="table"
-    ></table>
-    <script>
-      var todos = [];
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      //   Clear Todo
+    #addBtn,
+    #editBtn,
+    #clear {
+      background-color: #1e90ff;
+      border: none;
+      color: white;
+      padding: 10px 10px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
 
-      function ClearData() {
-         todos = [];
+    #delBtn {
+      background-color: #ff1e1e;
+      border: none;
+      color: white;
+      padding: 10px 10px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #delBtn:hover {
+      background-color: #bf2f2f;
+    }
+
+    #addBtn:hover,
+    #editBtn:hover {
+      background-color: #4169e1;
+    }
+
+    button i {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+
+<body>
+  <h1 class="text-3xl text-green-800">Welcome to My Todo App</h1>
+  <input type="text" id="title" class="border" />
+  <button id="addBtn" onclick="addTodo()">
+    <i class="fa fa-plus"></i>Add Todo
+  </button>
+  <button id="clear" onclick="ClearData()">
+    <i class="fa fa-minus"></i>Clear
+  </button>
+
+  <table class="border-separate border border border-slate-400" id="table"></table>
+  <script>
+    var todos = [];
+
+    //add Todo
+    function addTodo() {
+      var todo = document.getElementById("title").value;
+      if (todo) {
+        todos.push(todo);
+        document.getElementById("title").value = "";
         showTodos();
+      } else {
+        alert("Please enter something");
       }
+    }
 
-      // add Todo
-      function addTodo() {
-        var todo = document.getElementById("title").value;
-        if (todo) {
-          todos.push(todo);
-          document.getElementById("title").value = "";
-          showTodos();
-        } else {
-          alert("Please enter something");
-        }
-      }
-
-      // Show Todos
-      function showTodos() {
+    // Show Todos
+    function showTodos() {
         if (todos.length > 0) {
           document.querySelector("#table").innerHTML = "";
           document.querySelector("#table").innerHTML += `
@@ -115,20 +109,39 @@
         }
       }
 
-      // Delete Todo
-      function deleteTodo(i) {
-        todos.splice(i, 1);
-        showTodos();
-      }
+      
+    //delete Todo
+    function deleteTodo(i) {
+      delete todos[i];
+      showTodos();
+    }
 
-      // Edit Todo
-      function editTodo(i) {
-        const updatedTodo = prompt("Update the todo item:", todos[i]);
-        if (updatedTodo) {
-          todos[i] = updatedTodo;
-          showTodos();
-        }
+    //   Clear Todo
+
+    function ClearData() {
+      todos = [];
+      showTodos();
+    }
+
+
+    //Edit Todo
+    function editTodo(i) {
+
+      alert("Do u want to update" + " " + todos[i])
+
+      var updatedTodo = document.getElementById("title").value;
+
+      if (updatedTodo) {
+        todos[i] = updatedTodo;
+        console.log(todos);
+        showTodos();
+      } else {
+        alert("Please enter something");
       }
-    </script>
-  </body>
+    }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</body>
+
 </html>
